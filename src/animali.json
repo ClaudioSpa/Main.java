@@ -1,0 +1,94 @@
+{
+    "animali": [
+      {
+        "nome": "Coniglio",
+        "codice": 1,
+        "eta_morte": 9,
+        "eta_adulto": 1,
+        "num_max_cuccioli": 6,
+        "piante_mangiate": [0, 1, 2, 7],
+        "cibo_annuo": 2
+      },
+      {
+        "nome": "Cervo",
+        "codice": 2,
+        "eta_morte": 15,
+        "eta_adulto": 2,
+        "num_max_cuccioli": 2,
+        "piante_mangiate": [0, 4, 5, 7],
+        "cibo_annuo": 8
+      },
+      {
+        "nome": "Capriolo",
+        "codice": 3,
+        "eta_morte": 12,
+        "eta_adulto": 1,
+        "num_max_cuccioli": 3,
+        "piante_mangiate": [2, 5, 6],
+        "cibo_annuo": 6
+      },
+      {
+        "nome": "Mucca",
+        "codice": 4,
+        "eta_morte": 20,
+        "eta_adulto": 2,
+        "num_max_cuccioli": 1,
+        "piante_mangiate": [0, 2, 3, 8],
+        "cibo_annuo": 12
+      },
+      {
+        "nome": "Pecora",
+        "codice": 5,
+        "eta_morte": 12,
+        "eta_adulto": 1,
+        "num_max_cuccioli": 2,
+        "piante_mangiate": [0, 3, 1],
+        "cibo_annuo": 5
+      },
+      {
+        "nome": "Cavallo",
+        "codice": 6,
+        "eta_morte": 30,
+        "eta_adulto": 3,
+        "num_max_cuccioli": 1,
+        "piante_mangiate": [0, 3, 6, 9],
+        "cibo_annuo": 14
+      },
+      {
+        "nome": "Canguro",
+        "codice": 7,
+        "eta_morte": 23,
+        "eta_adulto": 4,
+        "num_max_cuccioli": 1,
+        "piante_mangiate": [0, 5, 6, 9],
+        "cibo_annuo": 6
+      },
+      {
+        "nome": "Zebra",
+        "codice": 8,
+        "eta_morte": 25,
+        "eta_adulto": 3,
+        "num_max_cuccioli": 1,
+        "piante_mangiate": [0, 3, 2],
+        "cibo_annuo": 8
+      },
+      {
+        "nome": "Giraffa",
+        "codice": 9,
+        "eta_morte": 28,
+        "eta_adulto": 4,
+        "num_max_cuccioli": 1,
+        "piante_mangiate": [4, 6, 5],
+        "cibo_annuo": 18
+      },
+      {
+        "nome": "Bufalo",
+        "codice": 0,
+        "eta_morte": 18,
+        "eta_adulto": 3,
+        "num_max_cuccioli": 1,
+        "piante_mangiate": [0, 3, 5],
+        "cibo_annuo": 20
+      }
+    ]
+}

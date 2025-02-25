@@ -1,0 +1,74 @@
+{
+    "piante": [
+        {
+            "nome": "Erba",
+            "codice": 0,
+            "eta_adulto": 1,
+            "eta_morte": 2,
+            "riproduzione": 1000
+        },
+        {
+            "nome": "Tarassaco",
+            "codice": 1,
+            "eta_adulto": 1,
+            "eta_morte": 3,
+            "riproduzione": 500
+        },
+        {
+            "nome": "Trifoglio",
+            "codice": 2,
+            "eta_adulto": 1,
+            "eta_morte": 4,
+            "riproduzione": 350
+        },
+        {
+            "nome": "Fieno",
+            "codice": 3,
+            "eta_adulto": 1,
+            "eta_morte": 5,
+            "riproduzione": 200
+        },
+        {
+            "nome": "Corteccia",
+            "codice": 4,
+            "eta_adulto": 2,
+            "eta_morte": 6,
+            "riproduzione": 200
+        },
+        {
+            "nome": "Felce",
+            "codice": 5,
+            "eta_adulto": 1,
+            "eta_morte": 3,
+            "riproduzione": 500
+        },
+        {
+            "nome": "Ginepro",
+            "codice": 6,
+            "eta_adulto": 3,
+            "eta_morte": 8,
+            "riproduzione": 200
+        },
+        {
+            "nome": "Carota",
+            "codice": 7,
+            "eta_adulto": 1,
+            "eta_morte": 2,
+            "riproduzione": 1000
+        },
+        {
+            "nome": "Bamboo",
+            "codice": 8,
+            "eta_adulto": 2,
+            "eta_morte": 7,
+            "riproduzione": 200
+        },
+        {
+            "nome": "Alfalfa",
+            "codice": 9,
+            "eta_adulto": 1,
+            "eta_morte": 4,
+            "riproduzione": 350
+        }
+    ]
+}
