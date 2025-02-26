@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 class Animale{
@@ -106,6 +108,34 @@ class Animale{
         this.pianteNec = pianteNec;
         this.numeroCuc = numeroCuc;
         this.ciboAnnuo = ciboAnnuo;
+    }
+
+    //COSTRUTTORE vuoto
+    public Animale(){}
+
+    public static String leggiJson(String filename) {
+       String jsonText = "";
+       try {
+        BufferReader bufferedReader = new BufferedReader(new FileReader(filename));
+
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            jsonText += line + "\n";
+        }
+
+        bufferedReader.close();
+
+       } catch (Exception e) {
+        e.printStackTrace();
+       }
+
+       return jsonText;
+    }
+
+    public void genera(int id) {
+        String strJson = leggiJson("animali.json");
+
+        System.out.println(strJson);
     }
 
     
