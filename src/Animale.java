@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -116,7 +118,7 @@ class Animale{
     public static String leggiJson(String filename) {
        String jsonText = "";
        try {
-        BufferReader bufferedReader = new BufferedReader(new FileReader(filename));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
 
         String line;
         while ((line = bufferedReader.readLine()) != null) {
