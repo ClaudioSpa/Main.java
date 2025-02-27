@@ -10,17 +10,17 @@ import org.json.JSONObject;
 
 
 class Animale{
-    private String nomeSp;                                  //Nome specie (lupo, gatto, rinoceronte, ...)
-    private int codiceSp;                                   //Codice della specie dell'animale
-    private long codiceAn;                                  //Codice "Privato" dell'animale
-    private char sesso;                                     //Sesso animale, m o f
-    private int etaMorte;                                   //Eta' in cui l'animale muore
-    private int etaAdulto;                                  //Eta' in cui l'animale diventa adulto
-    private int numeroCucMax;                               //Numero massimo di cuccioli
-    private int eta;                                        //Eta' dell'animale
-    ArrayList<Integer> pianteNec = new ArrayList<>();       //Piante necessarie all'animale per sopravvivere
-    private int numeroCuc;                                  //Numero di cuccioli dell'animale
-    private int ciboAnnuo;                                  //Cibo annuo necessario all'animale per sopravvivere.
+    private String nomeSp;                                          //Nome specie (lupo, gatto, rinoceronte, ...)
+    private int codiceSp;                                           //Codice della specie dell'animale
+    private long codiceAn;                                          //Codice "Privato" dell'animale
+    private char sesso;                                             //Sesso animale, m o f
+    private int etaMorte;                                           //Eta' in cui l'animale muore
+    private int etaAdulto;                                          //Eta' in cui l'animale diventa adulto
+    private int numeroCucMax;                                       //Numero massimo di cuccioli
+    private int eta;                                                //Eta' dell'animale
+    private ArrayList<Integer> pianteNec = new ArrayList<>();       //Piante necessarie all'animale per sopravvivere
+    private int numeroCuc;                                          //Numero di cuccioli dell'animale
+    private int ciboAnnuo;                                          //Cibo annuo necessario all'animale per sopravvivere.
 
     //GETTERS e SETTERS
     public String getNomeSp() {
