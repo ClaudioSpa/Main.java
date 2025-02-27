@@ -134,9 +134,17 @@ class Animale{
        return jsonText;
     }
 
+    public void assegnaDati (String strJson) {
+        // Inizializza ObjectMapper
+        ObjectMapper mapper = new ObjectMapper();
+
+        // Legge il JSON in un JsonNode
+        JsonNode rootNode = mapper.readTree(jsonString)
+    }
+
     public void genera(int id) {
         String strJson = leggiJson("animali.json");
-
+        assegnaDati(strJson);
         System.out.println(strJson);
     }
 
