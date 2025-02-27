@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         Animale a = new Animale();
-        a.creaAnimale(4);
+        a.inizializzaRandom();
         System.out.println(a.toString());
     }
 }

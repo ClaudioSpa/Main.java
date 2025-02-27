@@ -3,8 +3,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;*/
 import java.util.ArrayList;
+import java.util.Random;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 
 class Animale{
     private String nomeSp;                                  //Nome specie (lupo, gatto, rinoceronte, ...)
@@ -195,7 +198,16 @@ class Animale{
         + pianteNec + ", numeroCuc=" + numeroCuc + ", ciboAnnuo=" + ciboAnnuo + "]";
     }
 
+    //Crea un cucciolo random
+    public void inizializza () {
+        Random rand = new Random();
+        creaAnimale(rand.nextInt(10));
+    }
     
-    
-    
+    //Crea un animale con un'eta' random (cucciolo o adulto)
+    public void inizializzaRandom () {
+        inizializza();
+        Random rand = new Random();
+        eta = rand.nextInt(etaMorte);
+    }
 }
