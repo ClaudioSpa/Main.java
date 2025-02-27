@@ -1,18 +1,21 @@
-import java.io.File;
+/*import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
+import java.io.IOException;*/
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 class Animale{
     private String nomeSp;                                  //Nome specie (lupo, gatto, rinoceronte, ...)
-    private int codice;                                     //Codice animale
+    private int codiceSp;                                   //Codice della specie dell'animale
+    private long codiceAn;                                  //Codice "Privato" dell'animale
     private char sesso;                                     //Sesso animale, m o f
     private int etaMorte;                                   //Eta' in cui l'animale muore
     private int etaAdulto;                                  //Eta' in cui l'animale diventa adulto
     private int numeroCucMax;                               //Numero massimo di cuccioli
     private int eta;                                        //Eta' dell'animale
-    ArrayList<String> pianteNec = new ArrayList<>();        //Piante necessarie all'animale per sopravvivere
+    ArrayList<Integer> pianteNec = new ArrayList<>();       //Piante necessarie all'animale per sopravvivere
     private int numeroCuc;                                  //Numero di cuccioli dell'animale
     private int ciboAnnuo;                                  //Cibo annuo necessario all'animale per sopravvivere.
 
@@ -25,12 +28,20 @@ class Animale{
         this.nomeSp = nomeSp;
     }
 
-    public int getCodice() {
-        return codice;
+    public long getCodiceAn() {
+        return codiceAn;
     }
 
-    public void setCodice(int codice) {
-        this.codice = codice;
+    public void setCodiceAn(int codiceAn) {
+        this.codiceAn = codiceAn;
+    }
+
+    public int getCodice() {
+        return codiceSp;
+    }
+
+    public void setCodice(int codiceSp) {
+        this.codiceSp = codiceSp;
     }
 
     public char getSesso() {
@@ -73,11 +84,11 @@ class Animale{
         this.eta = eta;
     }
 
-    public ArrayList<String> getPianteNec() {
+    public ArrayList<Integer> getPianteNec() {
         return pianteNec;
     }
 
-    public void setPianteNec(ArrayList<String> pianteNec) {
+    public void setPianteNec(ArrayList<Integer> pianteNec) {
         this.pianteNec = pianteNec;
     }
 
@@ -98,10 +109,11 @@ class Animale{
     }
 
     //COSTRUTTORE di tutti i campi
-    public Animale(String nomeSp, int codice, char sesso, int etaMorte, int etaAdulto, int numeroCucMax, int eta,
-            ArrayList<String> pianteNec, int numeroCuc, int ciboAnnuo) {
+    public Animale(String nomeSp, int codiceSp, int codiceAn, char sesso, int etaMorte, int etaAdulto, int numeroCucMax, int eta,
+            ArrayList<Integer> pianteNec, int numeroCuc, int ciboAnnuo) {
         this.nomeSp = nomeSp;
-        this.codice = codice;
+        this.codiceSp = codiceSp;
+        this.codiceAn = codiceAn;
         this.sesso = sesso;
         this.etaMorte = etaMorte;
         this.etaAdulto = etaAdulto;
@@ -115,37 +127,72 @@ class Animale{
     //COSTRUTTORE vuoto
     public Animale(){}
 
-    public static String leggiJson(String filename) {
-       String jsonText = "";
-       try {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
+    public JSONArray estrapolaArray (String strJson) {
+        try {
+            // Trasforma la stringa JSON in un oggetto
+            JSONObject jsonObject = new JSONObject(strJson);
 
-        String line;
-        while ((line = bufferedReader.readLine()) != null) {
-            jsonText += line + "\n";
+            //Crea l'array con tutti gli animali
+            JSONArray animaliArray = jsonObject.getJSONArray("animali");
+            return animaliArray;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
         }
-
-        bufferedReader.close();
-
-       } catch (Exception e) {
-        e.printStackTrace();
-       }
-
-       return jsonText;
+        
     }
 
-    public void assegnaDati (String strJson) {
-        // Inizializza ObjectMapper
-        ObjectMapper mapper = new ObjectMapper();
-
-        // Legge il JSON in un JsonNode
-        JsonNode rootNode = mapper.readTree(jsonString)
+    //Genera un Animale dato l'id dell'animale
+    public JSONObject genera(int id) {
+        String strJson = LeggiJson.leggiJson("src/animali.json");
+        JSONArray jsArr = estrapolaArray(strJson);
+        
+        //Ciclo per trovare l'elemento dell'array con il codice richiesto
+        for (int i = 0; i < jsArr.length(); i++) {
+            JSONObject animale = jsArr.getJSONObject(i);
+            if (animale.getInt("codice") == id)
+                return animale;
+        }
+        
+        return null;
     }
 
-    public void genera(int id) {
-        String strJson = leggiJson("animali.json");
-        assegnaDati(strJson);
-        System.out.println(strJson);
+    //Crea un nuovo cucciolo (riempie i campi della classe) dato il codice
+    public void creaAnimale (int id) {
+        try {
+            JSONObject animale = genera(id);
+
+            nomeSp = animale.getString("nome");                                  
+            codiceSp = animale.getInt("codice"); 
+
+            if (System.currentTimeMillis() % 2 == 0)   
+                sesso = 'm';
+            else
+                sesso = 'f';  
+
+            etaMorte = animale.getInt("eta_morte");                              
+            etaAdulto = animale.getInt("eta_adulto");                              
+            numeroCucMax = animale.getInt("num_max_cuccioli");                            
+            eta = 0;  
+            
+            for (int i = 0; i < animale.getJSONArray("piante_mangiate").length(); i++) {
+                pianteNec.add(animale.getJSONArray("piante_mangiate").getInt(i));
+            }       
+        
+            numeroCuc = 0;                                  
+            ciboAnnuo = animale.getInt("cibo_annuo");
+            codiceAn = System.currentTimeMillis();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    //toString del metodo
+    @Override
+    public String toString() {
+        return "Animale [nomeSp=" + nomeSp + ", codice specie=" + codiceSp + ", codice animale=" + codiceAn + ", sesso=" + sesso + 
+        ", etaMorte=" + etaMorte + ", etaAdulto=" + etaAdulto + ", numeroCucMax=" + numeroCucMax + ", eta=" + eta + ", pianteNec="
+        + pianteNec + ", numeroCuc=" + numeroCuc + ", ciboAnnuo=" + ciboAnnuo + "]";
     }
 
     
