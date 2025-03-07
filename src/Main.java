@@ -1,7 +1,11 @@
 public class Main {
     public static void main(String[] args) {
+        Pianta p = new Pianta();
+        /*p.inizializza();
+        p.toString();*/
+
         Animale a = new Animale();
         a.inizializzaRandom();
-        System.out.println(a.toString());
+        a.toString();
     }
 }

@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;*/
 import java.util.ArrayList;
 import java.util.Random;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -130,6 +129,7 @@ class Animale{
     //COSTRUTTORE vuoto
     public Animale(){}
 
+    //Data una stringa in formato JSON, ritorna un oggetto JSONArray, oppure null se ci dovessero essere errori durante l'esecuzione.
     public JSONArray estrapolaArray (String strJson) {
         try {
             // Trasforma la stringa JSON in un oggetto
@@ -147,7 +147,7 @@ class Animale{
 
     //Genera un Animale dato l'id dell'animale
     public JSONObject genera(int id) {
-        String strJson = LeggiJson.leggiJson("src/animali.json");
+        String strJson = LeggiJson.leggiJson("animali.json");
         JSONArray jsArr = estrapolaArray(strJson);
         
         //Ciclo per trovare l'elemento dell'array con il codice richiesto
