@@ -34,7 +34,7 @@ class Animale{
         return codiceAn;
     }
 
-    public void setCodiceAn(int codiceAn) {
+    public void setCodiceAn(long codiceAn) {
         this.codiceAn = codiceAn;
     }
 
