@@ -98,7 +98,7 @@ class Pianta{
     //Genera una Pianta dato l'id della pianta
     public JSONObject genera(int id) {
         String strJson = LeggiJson.leggiJson("piante.json");
-        JSONArray jsArr = estrapolaArray(strJson);
+        JSONArray jsArr = LeggiJson.estrapolaArray(strJson, "piante");
         JSONObject pianta;
 
         //Ciclo per trovare l'elemento dell'array con il codice richiesto
@@ -109,22 +109,6 @@ class Pianta{
         }
         
         return null;
-    }
-
-    //Data una stringa in formato JSON, ritorna un oggetto JSONArray, oppure null se ci dovessero essere errori durante l'esecuzione.
-    public JSONArray estrapolaArray (String strJson) {
-        try {
-            // Trasforma la stringa JSON in un oggetto
-            JSONObject jsonObject = new JSONObject(strJson);
-
-            //Crea l'array con tutti le piante
-            JSONArray pianteArray = jsonObject.getJSONArray("piante");
-            return pianteArray;
-        } catch (Exception e) {
-            e.getMessage();
-            return null;
-        }
-        
     }
 
     //Crea una pianta con un'eta' random

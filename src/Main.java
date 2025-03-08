@@ -1,13 +1,18 @@
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class Main {
 
     static ArrayList <Animale> animali = new ArrayList<>();
     static ArrayList <Pianta> piante = new ArrayList<>();
+    static int numeroPiante = contaJSON("piante.json");             //Contiene il numero di elementi presenti nel file json piante.json
+    static int numeroAnimali = contaJSON("animali.json");           //contiene il numero di elementi presenti nel file json animali.json
 
     public static void main(String[] args) {
         int anno = 0;
-        riempiALanimali();
+        riempiAL();             //Inizializza gli ArrayList
         nuovoVegetale(anno);
 
         while (true) {
@@ -31,26 +36,44 @@ public class Main {
         return str;
     }
 
-    //Funzione che riempie l'AL animali con 1000 esemplari
-    public static void riempiALanimali () {
+    //Funzione che riempie l'AL animali con numeroAnimali * 100 esemplari e l'AL piante con numeroPiante * 10000 esemplari.
+    public static void riempiAL () {
         Animale a = new Animale();
+        Pianta p = new Pianta();
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < numeroAnimali * 100; i++) {
             a.inizializzaRandom();
             animali.set(i,a);
+        }
+
+        for (int i = 0; i < numeroPiante * 10000; i++) {
+            p.inizializzaRandom();
+            piante.set(i,p);
         }
     }
 
     //Funzione che fa riprodurre le piante
     public static void nuovoVegetale (int a) {
-        boolean[] esiste = new boolean[10]; 
+        Pianta p = new Pianta();
+        boolean[] esiste = new boolean[numeroPiante]; 
+
         if (a == 0) {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < numeroPiante; i++) {
                 esiste[i] = true;
             }
         } else {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < numeroPiante; i++) {
                 esiste[i] = controllaEsistenza(i);
+            }
+        }
+
+        for (int i = 0; i < numeroPiante; i++) {
+            if (esiste[i]) {
+                int ripr = numeroRiproduzione(i);
+                for (int j = 0; j < ripr; j++) {
+                    p.creaPianta(i);
+                    piante.set(i,p);
+                }
             }
         }
     }
@@ -62,6 +85,21 @@ public class Main {
                 return true;
         }
         return false;
+    }
+
+    //Ritorna il numero di elementi presenti in un file JSON
+    public static int contaJSON (String filename) {
+        String strJson = LeggiJson.leggiJson(filename);
+        JSONArray jsArr = LeggiJson.estrapolaArray(strJson, filename);
+        return jsArr.length();
+    }
+
+    //Ritorna il valore di riproduzione di una specie di pianta, dato il codice della pianta
+    public static int numeroRiproduzione (int id) {
+        String strJson = LeggiJson.leggiJson("piante.json");
+        JSONArray jsArr = LeggiJson.estrapolaArray(strJson, "piante");
+        JSONObject pianta = jsArr.getJSONObject(id);
+        return pianta.getInt("riproduzione");
     }
 
 }
