@@ -126,6 +126,13 @@ class Pianta{
         }
         
     }
+
+    //Crea una pianta con un'eta' random
+    public void inizializzaRandom () {
+        inizializza();
+        Random rand = new Random();
+        eta = rand.nextInt(etaMorte);
+    }
     
 
     

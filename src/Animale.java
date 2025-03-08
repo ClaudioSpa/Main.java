@@ -193,7 +193,7 @@ class Animale{
     //toString del metodo
     @Override
     public String toString() {
-        return "Animale [nomeSp=" + nomeSp + ", codice specie=" + codiceSp + ", codice animale=" + codiceAn + ", sesso=" + sesso + 
+        return "Animale" + "[nomeSp=" + nomeSp + ", codice specie=" + codiceSp + ", codice animale=" + codiceAn + ", sesso=" + sesso + 
         ", etaMorte=" + etaMorte + ", etaAdulto=" + etaAdulto + ", numeroCucMax=" + numeroCucMax + ", eta=" + eta + ", pianteNec="
         + pianteNec + ", numeroCuc=" + numeroCuc + ", ciboAnnuo=" + ciboAnnuo + "]";
     }
