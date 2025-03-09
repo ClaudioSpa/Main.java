@@ -30,9 +30,9 @@ public class Main {
                 System.out.println(e.getMessage());
             }
 
-            String infoAnno = trascorriAnno();
             anno++;
             System.out.println("Anno: " + anno);
+            String infoAnno = trascorriAnno();
             System.out.println(infoAnno); 
             
             pianteNateAnno = 0;
@@ -68,8 +68,20 @@ public class Main {
         uccidiEsemplari();
 
         mangia();                              //Sezione nutimento animale
+
+        str = produciStr();
     
         return str;
+    }
+
+
+    //Funzione che produce la stringa informativa 
+    public static String produciStr (){
+        return " Numero di animali nati in un anno: " + animaliNatiAnno +
+                "\nNumero di animali morti in un anno: " + animaliMorti + 
+                "\nNumero di piante nate in un anno: " + pianteNateAnno +
+                "\nNumero di piante mangiate in un anno: " + pianteMangiate +
+                "\nNumero di piante morte in un anno: " + pianteMorte;
     }
 
     //Funzione che aumenta l'eta' di tutti gli esemplari, sia piante sia animali
