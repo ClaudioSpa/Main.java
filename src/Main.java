@@ -64,11 +64,36 @@ public class Main {
             }
         }
 
-        elimina = false;
+        elementiEta();
+        uccidiEsemplari();
 
         mangia();                              //Sezione nutimento animale
     
         return str;
+    }
+
+    //Funzione che aumenta l'eta' di tutti gli esemplari, sia piante sia animali
+    public static void elementiEta () {
+        for (int i = 0; i < animali.size(); i++) {
+            animali.get(i).setEta(animali.get(i).getEta() + 1);
+        }
+
+        for (int i = 0; i < piante.size(); i++) {
+            piante.get(i).setEta(piante.get(i).getEta() + 1);
+        }
+    }
+
+    //Funzione che uccide tutti gli esemplari, sia piante sia animali, che hanno raggiunto l'eta' di morte
+    public static void uccidiEsemplari () {
+        for (int i = 0; i < animali.size(); i++) {
+            if (animali.get(i).getEta() > animali.get(i).getEtaMorte())
+                eliminaIndividuoAnimale(i);
+        }
+
+        for (int i = 0; i < piante.size(); i++) {
+            if (piante.get(i).getEta() > piante.get(i).getEtaMorte())
+                eliminaIndividuoPianta(i);
+        }
     }
 
     //Funzione che riempie l'AL animali con numeroAnimali * 100 esemplari e l'AL piante con numeroPiante * 10000 esemplari.
@@ -306,6 +331,7 @@ public class Main {
                 if (magg == numPiante[i])
                     return pn.get(i);
             }
+        }
         return -1;
         
     }
