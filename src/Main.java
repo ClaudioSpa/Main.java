@@ -167,7 +167,10 @@ public class Main {
     public static int contaJSON (String filename) {
         String strJson = LeggiJson.leggiJson(filename);
         JSONArray jsArr = LeggiJson.estrapolaArray(strJson, "esemplare");
-        return jsArr.length();
+        if (jsArr == null)
+            return 10;
+        else
+            return jsArr.length();
     }
 
     //Ritorna il valore di riproduzione di una specie di pianta, dato il codice della pianta
