@@ -166,7 +166,7 @@ public class Main {
     //Ritorna il numero di elementi presenti in un file JSON
     public static int contaJSON (String filename) {
         String strJson = LeggiJson.leggiJson(filename);
-        JSONArray jsArr = LeggiJson.estrapolaArray(strJson, filename);
+        JSONArray jsArr = LeggiJson.estrapolaArray(strJson, "esemplare");
         return jsArr.length();
     }
 
