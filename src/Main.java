@@ -20,12 +20,12 @@ public class Main {
 
     public static void main(String[] args) {
         int anno = 0;
-        riempiAL();             //Inizializza gli ArrayList
+        //riempiAL();             //Inizializza gli ArrayList
         nuovoVegetale(anno);
 
         while (true) {
             try {
-                Thread.sleep(600000);                           //Ogni 600 secondi passa un'anno
+                //Thread.sleep(600000);                           //Ogni 600 secondi passa un'anno
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -118,12 +118,12 @@ public class Main {
             while (controllaCodice(a)) {
                 a.setCodiceAn(a.getCodiceAn() + 1);
             }
-            animali.set(i,a);
+            animali.add(a);
         }
 
         for (int i = 0; i < numeroPiante * 10000; i++) {
             p.inizializzaRandom();
-            piante.set(i,p);
+            piante.add(p);
         }
     }
 
@@ -147,7 +147,7 @@ public class Main {
                 int ripr = numeroRiproduzione(i);
                 for (int j = 0; j < ripr; j++) {
                     p.creaPianta(i);
-                    piante.set(i,p);
+                    piante.add(p);
                     pianteNateAnno++;
                 }
             }
@@ -277,9 +277,14 @@ public class Main {
 
     //Dato il codice di un animale, ritorna il suo nome
     public static String trovaAnimale (int id) {
-        String strJson = LeggiJson.leggiJson("animali.json");
-        JSONArray jsArr = LeggiJson.estrapolaArray(strJson, "animale");
-        JSONObject animale = jsArr.getJSONObject(id);
+        JSONObject animale;
+        try {
+            String strJson = LeggiJson.leggiJson("animali.json");
+            JSONArray jsArr = LeggiJson.estrapolaArray(strJson, "animale");
+            animale = jsArr.getJSONObject(id);
+        } catch (Exception e) {
+            return (e.getMessage());
+        }
         return animale.getString("nome");
     }
 
