@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
         int anno = 0;
-        //riempiAL();             //Inizializza gli ArrayList
+        riempiAL();             //Inizializza gli ArrayList
         nuovoVegetale(anno);
 
         while (true) {
