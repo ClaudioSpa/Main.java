@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import org.json.JSONArray;
@@ -13,6 +14,9 @@ public class Main {
 
     static int pianteNateAnno = 0;
     static int animaliNatiAnno = 0;
+    static int pianteMangiate = 0;
+    static int pianteMorte = 0;
+    static int animaliMorti = 0;
 
     public static void main(String[] args) {
         int anno = 0;
@@ -32,6 +36,10 @@ public class Main {
             System.out.println(infoAnno); 
             
             pianteNateAnno = 0;
+            animaliNatiAnno = 0;
+            pianteMangiate = 0;
+            pianteMorte = 0;
+            animaliMorti = 0;
         }
     }
 
@@ -39,7 +47,8 @@ public class Main {
     public static String trascorriAnno () {
         String str = "";
         boolean elimina = false;
-        for (int i = 0; i < numeroAnimali; i++) {
+
+        for (int i = 0; i < numeroAnimali; i++) {                           //Sezione riproduzione animale
             ArrayList<Animale> specie = new ArrayList<>();
             specie = partiziona(i);
 
@@ -54,6 +63,11 @@ public class Main {
                 eliminaAnimale(i);
             }
         }
+
+        elimina = false;
+
+        mangia();                              //Sezione nutimento animale
+    
         return str;
     }
 
@@ -212,7 +226,7 @@ public class Main {
     }
 
     //Elimina l'animale con codice passato come parametro dall'AL, e dice che tale animale si e' estinto
-    public static void elimina (int id) {
+    public static void eliminaAnimale (int id) {
         for (int i = 0; i < animali.size(); i++) {
             if (animali.get(i).getCodice() == id)
                 animali.remove(i);
@@ -227,6 +241,73 @@ public class Main {
         JSONArray jsArr = LeggiJson.estrapolaArray(strJson, "animale");
         JSONObject animale = jsArr.getJSONObject(id);
         return animale.getString("nome");
+    }
+
+    //Funzione che fa mangiare tutti gli animali
+    public static void mangia () {
+        int codVeg = 0;             //Codice del vegetale che l'animale mangia
+        for (int i = 0; i < animali.size(); i++) {
+            codVeg = vegetaleMaggiore(animali.get(i).getPianteNec());
+            if (codVeg != -1) {
+                if (animali.get(i).getEta() >= animali.get(i).getEtaAdulto()) {                 //Animale adulto
+                    consuma(animali.get(i).getCiboAnnuo(), codVeg);
+                } else {                                                                        //Animale cucciolo
+                    consuma(animali.get(i).getCiboAnnuo() / 2, codVeg);
+                }
+            } else {
+                eliminaAnimale(animali.get(i).getCodice());                             //Se un anno finisce il cibo, tutti gli animali della specie che necessita quella pianta muoiono
+            }
+        }
+
+    }
+
+    //Funzione che fa "mangiare" un animale (elimina quella pianta dall'array in quella quantita')
+    public static void consuma (int cibo, int cod) {
+        for (int i = 0; i < piante.size() && cibo > 0; i++) {  
+            if (piante.get(i).getCodice() == cod) {
+                eliminaIndividuoPianta(i);
+                cibo--;
+                pianteMangiate++;
+            }
+        }
+    } 
+
+    //Funzione che elimina una pianta dall'AL piante 
+    public static void eliminaIndividuoPianta (int i) {
+        piante.remove(i);
+        pianteMorte++;
+    }
+
+    //Funzione che elimina un animale dall'AL animali
+    public static void eliminaIndividuoAnimale (int i) {
+        animali.remove(i);
+        animaliMorti++;
+    }
+
+    //Dato un AL di vegetali, ritorna il codice di quello in quantita' maggiore nel sistema
+    public static int vegetaleMaggiore (ArrayList <Integer> pn) {
+        int magg = 0;
+        int[] numPiante = new int[pn.size()];
+        Arrays.fill(numPiante, 0);
+
+        for (int i = 0; i < pn.size(); i++) {
+            for (int j = 0; j < piante.size(); j++) {
+                if (pn.get(i) == piante.get(j).getCodice()) {
+                    numPiante[i]++;
+                }
+            }
+
+            if (numPiante[i] > magg)
+                magg = numPiante[i];
+        }
+
+        if (magg != 0) {
+            for (int i = 0; i < numPiante.length; i++) {
+                if (magg == numPiante[i])
+                    return pn.get(i);
+            }
+        return -1;
+        
     }
 
 }
