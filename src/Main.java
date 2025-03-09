@@ -292,10 +292,18 @@ public class Main {
                     consuma(animali.get(i).getCiboAnnuo() / 2, codVeg);
                 }
             } else {
-                eliminaAnimale(animali.get(i).getCodice());                             //Se un anno finisce il cibo, tutti gli animali della specie che necessita quella pianta muoiono
+                eliminaAnimaleSucc(animali.get(i).getCodice(), i);                             //Se un anno finisce il cibo, tutti gli animali della specie che necessita quella pianta muoiono
             }
         }
 
+    }
+
+    //Funzione che elimina tutti gli animali successivi a un determinato codice
+    public static void eliminaAnimaleSucc (int id, int s) {
+        for (int i = s; i < animali.size(); i++) {
+            if (animali.get(i).getCodice() == id)
+                animali.remove(i);
+        }
     }
 
     //Funzione che fa "mangiare" un animale (elimina quella pianta dall'array in quella quantita')
